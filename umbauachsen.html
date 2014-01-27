@@ -66,10 +66,17 @@
 	for (y=0; y<3; y++)
 		drill({r: 4.92/2, x: x*85+x2*30, y: -130/2+15+y*20, d: depth, zsteps: 4});
 
+	x = -1;
+	for (y=-1; y<2; y+=2)
+		drill({r: 4.92/2, x: x*69.6/2, y: -20+y*69.6/2, d: depth, zsteps: 4});
 
+	drill({r: 35/2, y: -20, d: depth, zsteps: 4});
+
+	x = 1;
+	for (y=-1; y<2; y+=2)
+		drill({r: 4.92/2, x: x*69.6/2, y: -20-y*69.6/2, d: depth, zsteps: 4});
 
 				
-	x = 1;
 	x2 = -1;
 	for (y=0; y<3; y++)
 		drill({r: 4.92/2, x: x*85+x2*30, y: -130/2+15+y*20, d: depth, zsteps: 4});
