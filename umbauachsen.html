@@ -41,28 +41,55 @@
 	drillSpeed = 100;
 	
 	depth = 8;
-
-	y = -1;
-	for (x=-1; x<=1; x+=2)
+	feed({z: 2});
+	
+	x = -1;
+	for (y=-1; y<=1; y+=2)
 			drill({r: 8.5/2, x: x*425, y: y*45, z: 0, d: depth});
 
-	for (x=-1; x<=1; x+=2)
-		for (x2=-1; x2<=1; x2+=2)
-			for (y=0; y<3; y++)
-				drill({r: 4.92/2, x: x*85+x2*30, y: -130/2+15+y*20, d: depth, zsteps: 4});
+	x2 = -1;
+	for (y=-1; y<=1; y+=2)
+			drill({r: 4.13/2, x: x*315+x2*27, y: 130/2-54+y*9, d: depth, zsteps: 4});
+			
+	rect({w: 41, d: 3, x: x*315, steps: 2, offset: 3});
+	drill({r: 35/2, z: -3, x: x*315, d: 5});
+	x2 = 1;
+	for (y=-1; y<=1; y+=2)
+			drill({r: 4.13/2, x: x*315+x2*27, y: 130/2-54+y*9, d: depth, zsteps: 4});
 
-	for (x=-1; x<=1; x+=2)
-		for (y=-1; y<=1; y+=2)
-			for (x2=-1; x2<=1; x2+=2)
-				drill({r: 4.13/2, x: x*315+x2*27, y: 130/2-54+y*9, d: depth, zsteps: 4});
+	x2 = -1;
+	for (y=0; y<3; y++)
+		drill({r: 4.92/2, x: x*85+x2*30, y: -130/2+15+y*20, d: depth, zsteps: 4});
+
+	rect({w: 30, h: 70, y: -30,  d: 8, x: x*85, steps: 4, offset: 3});
+	x2 = 1;
+	for (y=0; y<3; y++)
+		drill({r: 4.92/2, x: x*85+x2*30, y: -130/2+15+y*20, d: depth, zsteps: 4});
+
+
+
 				
-	for (x=-1; x<=1; x+=2)
-		rect({w: 41, d: 3, x: x*315, steps: 4, offset: 3});
+	x = 1;
+	x2 = -1;
+	for (y=0; y<3; y++)
+		drill({r: 4.92/2, x: x*85+x2*30, y: -130/2+15+y*20, d: depth, zsteps: 4});
+	rect({w: 30, h: 70, y: -30,  d: 8, x: x*85, steps: 4, offset: 3});
+	x2 = 1;
+	for (y=0; y<3; y++)
+		drill({r: 4.92/2, x: x*85+x2*30, y: -130/2+15+y*20, d: depth, zsteps: 4});
+		
+	x2 = -1;
+	for (y=-1; y<=1; y+=2)
+		drill({r: 4.13/2, x: x*315+x2*27, y: 130/2-54+y*9, d: depth, zsteps: 4});
+		
+	rect({w: 41, d: 3, x: x*315, steps: 2, offset: 3});
+	drill({r: 35/2, z: -3, x: x*315, d: 5});
+	x2 = 1;
+	for (y=-1; y<=1; y+=2)
+		drill({r: 4.13/2, x: x*315+x2*27, y: 130/2-54+y*9, d: depth, zsteps: 4});
 
-	for (x=-1; x<=1; x+=2)
-		rect({w: 30, h: 70, y: -30,  d: 8, x: x*85, steps: 2, offset: 3});
+	for (y=-1; y<=1; y+=2)
+		drill({r: 8.5/2, x: x*425, y: y*45, z: 0, d: depth});
 
-	for (x=-1; x<=1; x+=2)
-		drill({r: 35/2, z: -3, x: x*315, d: 5});
 </script>
 </pre>
