@@ -62,7 +62,7 @@
 	for (y=0; y<3; y++)
 		drill({r: 4.92/2, x: x*85+x2*30, y: -130/2+15+y*20, d: depth, zsteps: 4});
 
-	rect({width: 30, height: 70, y: -30,  depth: 8, x: x*85, nStepsZ: 4, stepSize: 3});
+	rect({width: 30, height: 70, y: -30,  depth: 8, x: x*85, nStepsZ: 4, stepSize: 3, extendCorners: true });
 	x2 = 1;
 	for (y=0; y<3; y++)
 		drill({r: 4.92/2, x: x*85+x2*30, y: -130/2+15+y*20, d: depth, zsteps: 4});
