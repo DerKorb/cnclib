@@ -1,0 +1,78 @@
+<pre>
+<div id="container"></div>
+<style>
+	body {
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+	}
+	
+	.buttons {
+		position: absolute;
+		top: 10px;
+		left: 10px;
+	}
+	
+	.buttons button {
+		border: 1px solid black;
+		background-color: darkgray;
+		color: white;
+		font-size: 16px;
+		padding: 4px;
+	}
+	
+	#time {
+		font-family: verdana;
+		font-size: 16px;
+		font-weight: bold;
+	}
+</style>
+<script src="lib/jquery.js"></script>
+<script src="lib/three.js"></script>
+<script src="lib/orbit.js"></script>
+<script src="lib/cnclib.js"></script>
+<textarea class="buttons" style="display: none">
+</textarea>
+<script>
+	mill = 6;
+
+	distance = 226/25;
+	feedSpeed = 200;
+	drillSpeed = 100;
+
+	
+	hex(0,0,112);
+	for (B = Math.PI/6.0; B <= Math.PI*2; B+=Math.PI/3.0)
+	{
+		console.log(B);
+		hex(100*Math.cos(B), 100*Math.sin(B), 112);
+	}
+	
+	/*for (y=-6.5; y<=6.5; y++)
+	{
+		// goto start position:
+		feed({x: 139+mill/2, y: 125+y*distance, z: 1})
+		for (z=-3; z>=-18; z-=3)
+		{
+			// drill a bit:
+			straightFeed({x: 139+mill/2, y: 125+y*distance, z: z, f: drillSpeed})
+			// mill 3mm
+			straightFeed({x: 139+122-mill/2, y: 125+y*distance, z: z, f: feedSpeed})
+			z-=3;
+			// drill a bit:
+			straightFeed({x: 139+122-mill/2, y: 125+y*distance, z: z, f: drillSpeed})
+			// mill 3mm
+			straightFeed({x: 139+mill/2, y: 125+y*distance, z: z, f: feedSpeed})
+
+		}
+		feed({z: 1});
+	}
+	// Clean cut over the border:
+	straightFeed({x: 139+mill/2, y: 125+6.5*distance+2, z: -18, f: feedSpeed});
+	straightFeed({x: 139+mill/2, y: 125-6.5*distance-2, z: -18, f: feedSpeed});
+	feed({x: 139+122-mill/2, y: 125+6.5*distance+2, z: -18});
+	straightFeed({x: 139+122-mill/2, y: 125-6.5*distance-2, z: -18, f: feedSpeed});
+	feed({z: 5});
+	feed({x: 0, y: 0});*/
+</script>
+</pre>

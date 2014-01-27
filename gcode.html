@@ -1,0 +1,64 @@
+<pre>
+<script>
+	mill = 6;
+	command = function(parts) {
+		document.write(parts.join(" ")+"\n");
+	}
+
+	sanitize = function(_var) 
+	{
+		return typeof(_var)=="number" ? _var.toFixed(3) : _var;
+	}
+	
+	straightFeed = function(x, y, z, speed) 
+	{
+		params = ["G1", "X"+sanitize(x), "Y"+sanitize(y), "Z"+sanitize(z), "F"+sanitize(speed)];
+		if (typeof(x) == "object")
+		{
+			params = ["G1"];
+			for (key in x)
+			{
+				params.push(key.toUpperCase()+sanitize(x[key]));
+			}
+		}
+		command(params);
+	}
+	
+	feed = function(x, y, z, speed) 
+	{
+		params = ["G0", "X"+sanitize(x), "Y"+sanitize(y), "Z"+sanitize(z), "F"+sanitize(speed)];
+		if (typeof(x) == "object")
+		{
+			params = ["G0"];
+			for (key in x)
+			{
+				params.push(key.toUpperCase()+sanitize(x[key]));
+			}
+		}
+		command(params);
+	}
+	
+	hex = function(x, y, s) {
+		feed({z: -4});
+		for (r = 0.0; r<s/2-mill/2; r+= 5.0)
+			for (a = Math.PI/6.0; a <= Math.PI*13/6.0; a+=Math.PI/3.0)
+				straightFeed({x: x+r*Math.cos(a), y: y+r*Math.sin(a)});
+
+		feed({z: -1});
+		r=s/2;
+		for (a = Math.PI/6.0; a <= Math.PI*13/6.0; a+=Math.PI/3.0)
+			straightFeed({x: x+r*Math.cos(a), y: y+r*Math.sin(a)});
+				
+	}
+	
+	
+	command(["%"]);
+	hex(0,0,112);
+	for (B = Math.PI/6.0; B <= Math.PI*2; B+=Math.PI/3.0)
+	{
+		console.log(B);
+		hex(100*Math.cos(B), 100*Math.sin(B), 112);
+	}
+	command(["%"]);
+</script>
+</pre>

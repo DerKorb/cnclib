@@ -1,0 +1,68 @@
+<pre>
+<div id="container"></div>
+<style>
+	body {
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+	}
+	
+	.buttons {
+		position: absolute;
+		top: 10px;
+		left: 10px;
+	}
+	
+	.buttons button {
+		border: 1px solid black;
+		background-color: darkgray;
+		color: white;
+		font-size: 16px;
+		padding: 4px;
+	}
+	
+	#time {
+		font-family: verdana;
+		font-size: 16px;
+		font-weight: bold;
+	}
+</style>
+<script src="lib/jquery.js"></script>
+<script src="lib/three.js"></script>
+<script src="lib/orbit.js"></script>
+<script src="lib/cnclib.js"></script>
+<textarea class="buttons" style="display: none">
+</textarea>
+<script>
+	mill = 6;
+
+	distance = 226/25;
+	feedSpeed = 200;
+	drillSpeed = 100;
+	
+	depth = 8;
+
+	y = -1;
+	for (x=-1; x<=1; x+=2)
+			drill({r: 8.5/2, x: x*425, y: y*45, z: 0, d: depth});
+
+	for (x=-1; x<=1; x+=2)
+		for (x2=-1; x2<=1; x2+=2)
+			for (y=0; y<3; y++)
+				drill({r: 4.92/2, x: x*85+x2*30, y: -130/2+15+y*20, d: depth, zsteps: 4});
+
+	for (x=-1; x<=1; x+=2)
+		for (y=-1; y<=1; y+=2)
+			for (x2=-1; x2<=1; x2+=2)
+				drill({r: 4.13/2, x: x*315+x2*27, y: 130/2-54+y*9, d: depth, zsteps: 4});
+				
+	for (x=-1; x<=1; x+=2)
+		rect({w: 41, d: 3, x: x*315, steps: 4, offset: 3});
+
+	for (x=-1; x<=1; x+=2)
+		rect({w: 30, h: 70, y: -30,  d: 8, x: x*85, steps: 2, offset: 3});
+
+	for (x=-1; x<=1; x+=2)
+		drill({r: 35/2, z: -3, x: x*315, d: 5});
+</script>
+</pre>
