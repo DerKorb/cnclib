@@ -42,7 +42,7 @@
 	feedSpeed = 200;
 	drillSpeed = 100;
 	
-	depth = 8;
+	depth = 9;
 	
 	x = -1;
 	for (y=-1; y<=1; y+=2)
@@ -52,8 +52,8 @@
 	for (y=-1; y<=1; y+=2)
 			drill({r: 4.13/2, x: x*315+x2*27, y: 130/2-54+y*9, d: depth, zsteps: 4});
 			
-	rect({side: 41, depth: 3, x: x*315, y:2, nStepsZ: 2, stepSize: 3});
-	drill({r: 35/2, z: -3, x: x*315, d: 5, y:2, outlineOnly: true});
+	rect({side: 41, depth: 3, x: x*315, y:2, nStepsZ: 2, stepSize: 3, extendCorners: true});
+	drill({r: 35/2, z: -3, x: x*315, d: 6, y:2, outlineOnly: true, zsteps: 3});
 	x2 = 1;
 	for (y=-1; y<=1; y+=2)
 			drill({r: 4.13/2, x: x*315+x2*27, y: 130/2-54+y*9, d: depth, zsteps: 4});
@@ -90,8 +90,8 @@
 	for (y=-1; y<=1; y+=2)
 		drill({r: 4.13/2, x: x*315+x2*27, y: 130/2-54+y*9, d: depth, zsteps: 4});
 		
-	rect({side: 41, depth: 3, x: x*315, nStepsZ: 2, stepSize: 3, y: 2});
-	drill({r: 35/2, z: -3, x: x*315, d: 5, y: 2, outlineOnly: true});
+	rect({side: 41, depth: 3, x: x*315, nStepsZ: 2, stepSize: 3, y: 2, extendCorners: true});
+	drill({r: 35/2, z: -3, x: x*315, d: 6, y: 2, outlineOnly: true, zsteps: 2});
 	x2 = 1;
 	for (y=-1; y<=1; y+=2)
 		drill({r: 4.13/2, x: x*315+x2*27, y: 130/2-54+y*9, d: depth, zsteps: 4});
