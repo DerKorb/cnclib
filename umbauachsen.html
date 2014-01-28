@@ -36,14 +36,14 @@
 <textarea class="buttons" style="display: none">
 </textarea>
 <script>
-	var cnc = new cnclib();
+	var cnc = new cnclib({ extendCorners: true });
 	var mill = 4;
 
 	distance = 226/25;
 	feedSpeed = 200;
 	drillSpeed = 100;
 	
-	depth = 8;
+	depth = 9;
 	
 	x = -1;
 	for (y=-1; y<=1; y+=2)
@@ -54,7 +54,8 @@
 		cnc.drill({r: 4.13/2, x: x*315+x2*27, y: 130/2-54+y*9, d: depth, zsteps: 4});
 			
 	cnc.rect({side: 41, depth: 3, x: x*315, y:2, nStepsZ: 2, stepSize: 3});
-	cnc.drill({r: 35/2, z: -3, x: x*315, d: 5, y:2, outlineOnly: true});
+	cnc.drill({r: 35/2, z: -3, x: x*315, d: 5, y:2, outlineOnly: true, zsteps: 3});
+
 	x2 = 1;
 	for (y=-1; y<=1; y+=2)
 		cnc.drill({r: 4.13/2, x: x*315+x2*27, y: 130/2-54+y*9, d: depth, zsteps: 4});
@@ -63,7 +64,7 @@
 	for (y=0; y<3; y++)
 		cnc.drill({r: 4.92/2, x: x*85+x2*30, y: -130/2+15+y*20, d: depth, zsteps: 4});
 
-	cnc.rect({width: 30, height: 70, y: -30,  depth: 8, x: x*85, nStepsZ: 4, stepSize: 3, extendCorners: true, outlineOnly: true });
+	cnc.rect({width: 30, height: 70, y: -30,  depth: 8, x: x*85, nStepsZ: 4, stepSize: 3, outlineOnly: true });
 	x2 = 1;
 	for (y=0; y<3; y++)
 		cnc.drill({r: 4.92/2, x: x*85+x2*30, y: -130/2+15+y*20, d: depth, zsteps: 4});
@@ -82,7 +83,7 @@
 	for (y=0; y<3; y++)
 		cnc.drill({r: 4.92/2, x: x*85+x2*30, y: -130/2+15+y*20, d: depth, zsteps: 4});
 
-	cnc.rect({width: 30, height: 70, y: -30,  depth: 8, x: x*85, nStepsZ: 4, stepSize: 3, extendCorners: true, outlineOnly: true});
+	cnc.rect({width: 30, height: 70, y: -30,  depth: 8, x: x*85, nStepsZ: 4, stepSize: 3, outlineOnly: true});
 	x2 = 1;
 	for (y=0; y<3; y++)
 		cnc.drill({r: 4.92/2, x: x*85+x2*30, y: -130/2+15+y*20, d: depth, zsteps: 4});
@@ -92,7 +93,8 @@
 		cnc.drill({r: 4.13/2, x: x*315+x2*27, y: 130/2-54+y*9, d: depth, zsteps: 4});
 		
 	cnc.rect({side: 41, depth: 3, x: x*315, nStepsZ: 2, stepSize: 3, y: 2});
-	cnc.drill({r: 35/2, z: -3, x: x*315, d: 5, y: 2, outlineOnly: true});
+	cnc.drill({r: 35/2, z: -3, x: x*315, d: 5, y: 2, outlineOnly: true, zsteps: 2});
+
 	x2 = 1;
 	for (y=-1; y<=1; y+=2)
 		cnc.drill({r: 4.13/2, x: x*315+x2*27, y: 130/2-54+y*9, d: depth, zsteps: 4});
