@@ -59,8 +59,8 @@
 	for (y=-1; y<=1; y+=2)
 		cnc.drill({radius: 4.13/2, x: x*315+x2*27, y: 130/2-54+y*9, depth: depth, nStepsZ: 4});
 			
-	cnc.rect({side: 41, depth: 3, x: x*315, y:2, nStepsZ: 2, stepSize: 3});
-	cnc.drill({radius: 35/2, z0: -3, x: x*315, depth: 5, y:2, outlineOnly: true, nStepsZ: 3});
+	var id = cnc.rect({side: 41, depth: 3, x: x*315, y:2, nStepsZ: 2, stepSize: 3});
+	cnc.drill({radius: 35/2, z0: -3, x: x*315, depth: 5, y:2, outlineOnly: true, nStepsZ: 3, requires: [ id ] });
 
 	x2 = 1;
 	for (y=-1; y<=1; y+=2)
@@ -98,8 +98,8 @@
 	for (y=-1; y<=1; y+=2)
 		cnc.drill({radius: 4.13/2, x: x*315+x2*27, y: 130/2-54+y*9, depth: depth, nStepsZ: 4});
 		
-	cnc.rect({side: 41, depth: 3, x: x*315, nStepsZ: 2, stepSize: 3, y: 2});
-	cnc.drill({radius: 35/2, z0: -3, x: x*315, depth: 5, y: 2, outlineOnly: true, nStepsZ: 2});
+	id = cnc.rect({side: 41, depth: 3, x: x*315, nStepsZ: 2, stepSize: 3, y: 2});
+	cnc.drill({radius: 35/2, z0: -3, x: x*315, depth: 5, y: 2, outlineOnly: true, nStepsZ: 2, requires: [ id ] });
 
 	x2 = 1;
 	for (y=-1; y<=1; y+=2)
