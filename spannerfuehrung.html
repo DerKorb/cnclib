@@ -36,7 +36,7 @@
 <textarea class="buttons" style="display: none">
 </textarea>
 <script>
-	var cnc = new cnclib({ extendCorners: true, dipSpeed: 50 , defaultSpeed: 500, maxVSpeed: 100});
+	var cnc = new cnclib({ extendCorners: true, dipSpeed: 50 , defaultSpeed: 300, maxVSpeed: 100});
 	var mill = 6;
 
 	distance = 226/25;
@@ -44,10 +44,10 @@
 	drillSpeed = 100;
 	
 	depth = 16;
-	cnc.drill({radius: 30/2, depth: 1, nStepsZ: 1, x: 0, y: 0});
-	cnc.drill({radius: 8.36/2, depth: depth, nStepsZ: 7, x: 0, y: 0});
-	cnc.rect({width: 72, height: 12, depth: 8, x: +34-15, y:+25+1-5, nStepsZ: 4, stepSize: 2});
-	cnc.rect({width: 72, height: 12, depth: 8, x: +34-15, y:-25-1+5, nStepsZ: 4, stepSize: 2});
+	cnc.drill({radius: 6.2/2, depth: 11, nStepsZ: 6, x: +20, y: -5});
+	cnc.drill({radius: 6.2/2, depth: 11, nStepsZ: 6, x: 0, y: -5});
+	cnc.drill({radius: 6.2/2, depth: 11, nStepsZ: 6, x: -20, y: -5});
+	cnc.rect({width: 71, height: 11, depth: 5, x: 0, y:+5.5, nStepsZ: 4, stepSize: 2});
 	$(function() {
 		cnc.done();
 	});
