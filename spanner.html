@@ -1,0 +1,56 @@
+<pre>
+<div id="container"></div>
+<style>
+	body {
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+	}
+	
+	.buttons {
+		position: absolute;
+		top: 10px;
+		left: 10px;
+	}
+	
+	.buttons button {
+		border: 1px solid black;
+		background-color: darkgray;
+		color: white;
+		font-size: 16px;
+		padding: 4px;
+	}
+	
+	#time {
+		font-family: verdana;
+		font-size: 16px;
+		font-weight: bold;
+	}
+</style>
+<script src="lib/jquery.js"></script>
+<script src="lib/socket.io.js"></script>
+<script src="lib/three.js"></script>
+<script src="lib/helvetiker_regular.typeface.js"></script>
+<script src="lib/orbit.js"></script>
+<script src="lib/cnclib.js"></script>
+<textarea class="buttons" style="display: none">
+</textarea>
+<script>
+	var cnc = new cnclib({ extendCorners: true, dipSpeed: 200 });
+	var mill = 8;
+
+	distance = 226/25;
+	feedSpeed = 200;
+	drillSpeed = 100;
+	
+	depth = 16;
+	cnc.drill({r: 30/2, d: 1});
+	cnc.drill({r: 8.36/2, d: depth});
+	cnc.rect({width: 72, height: 12, depth: 8, x: +34-15, y:+25+1-5, nStepsZ: 4, stepSize: 3});
+	cnc.rect({width: 72, height: 12, depth: 8, x: +34-15, y:-25-1+5, nStepsZ: 4, stepSize: 3});
+	$(function() {
+		cnc.done();
+	});
+
+</script>
+</pre>
