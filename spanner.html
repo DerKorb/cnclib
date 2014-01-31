@@ -43,11 +43,13 @@
 	feedSpeed = 200;
 	drillSpeed = 100;
 	
-	depth = 16;
+	/*depth = 16;
 	cnc.drill({radius: 30/2, depth: 1, nStepsZ: 1, x: 0, y: 0});
 	cnc.drill({radius: 8.36/2, depth: depth, nStepsZ: 7, x: 0, y: 0});
 	cnc.rect({width: 72, height: 12, depth: 8, x: +34-15, y:+25+1-5, nStepsZ: 4, stepSize: 2});
-	cnc.rect({width: 72, height: 12, depth: 8, x: +34-15, y:-25-1+5, nStepsZ: 4, stepSize: 2});
+	cnc.rect({width: 72, height: 12, depth: 8, x: +34-15, y:-25-1+5, nStepsZ: 4, stepSize: 2});*/
+
+	cnc.rect({width: 72, height: 12, depth: 8, x: +34-15, y:+25+1-5, nStepsZ: 4, stepSize: 2});
 	$(function() {
 		cnc.done();
 	});
