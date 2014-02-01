@@ -48,6 +48,9 @@
 	cnc.drill({radius: 6.2/2, depth: 11, nStepsZ: 6, x: 0, y: -5});
 	cnc.drill({radius: 6.2/2, depth: 11, nStepsZ: 6, x: -20, y: -5});
 	cnc.rect({width: 71, height: 11, depth: 5, x: 0, y:+5.5, nStepsZ: 4, stepSize: 2});*/
+	
+	cnc.rect({width: 71, height: 11, depth: 5, x: 0, y:+5.5, nStepsZ: 4, stepSize: 2, rotation: rad(20) });
+	/*
 	cnc.customPart(function(lib)
 	{
 		for (y = 0; y < 50; y+=4)
@@ -58,7 +61,7 @@
 			lib.straightFeed({x: 80, y: y, z: -1.25, speed: 300});
 			lib.straightFeed({x: 00, y: y, z: -1.25, speed: 300});
 		}
-	});
+	});*/
 	$(function() {
 		cnc.done();
 	});
