@@ -1,0 +1,158 @@
+<pre>
+<div id="container"></div>
+<style>
+	body {
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+	}
+	
+	.buttons {
+		position: absolute;
+		top: 10px;
+		left: 10px;
+	}
+	
+	.buttons button {
+		border: 1px solid black;
+		background-color: darkgray;
+		color: white;
+		font-size: 16px;
+		padding: 4px;
+	}
+	
+	#time {
+		font-family: verdana;
+		font-size: 16px;
+		font-weight: bold;
+	}
+	#pathtime {
+		font-family: verdana;
+		font-size: 14px;
+		font-weight: bold;
+		color: #cccccc;
+	}
+</style>
+<script src="lib/jquery.js"></script>
+<script src="lib/socket.io.js"></script>
+<script src="lib/three.js"></script>
+<script src="lib/helvetiker_regular.typeface.js"></script>
+<script src="lib/orbit.js"></script>
+<script src="lib/cnclib.js"></script>
+<textarea class="buttons" style="display: none">
+</textarea>
+<script>
+	var cnc = new cnclib({ extendCorners: true, defaultSpeed: 500, dipSpeed: 200 });
+	var mill = 2;
+
+	var dim = { x: 400, y: 250 }; // width & height of segment
+	var nsegments = 3; // number of repeated segments
+	var spacing = 150; //mm spacing between segments
+	
+	var types = 
+		[
+			{ r: 1.35, d: 5, step: 1, always: true  },
+			{ r: 1.35, d: 5, step: 1, always: false },
+			{ r: 5.50, d: 6, step: 1, always: true  },
+		];
+	
+	var holes = 
+		[
+			{ x:   5, y:  40, type: 0 },
+			{ x:  30, y:  20, type: 0 },
+			{ x: 132, y:  22, type: 0 },
+			{ x: 132, y:  60, type: 0 },
+			{ x: 200, y:  45, type: 0 },
+			{ x: 215, y:  40, type: 0 },
+			{ x: 296, y:  17, type: 0 },
+			{ x: 330, y:  17, type: 0 },
+			{ x: 370, y:  20, type: 0 },
+			
+			{ x: 250, y:  75, type: 2 },
+
+			{ x: 231, y:  95, type: 0 },
+			{ x: 231, y: 155, type: 0 },
+			{ x: 169, y: 155, type: 0 },
+			{ x: 169, y:  95, type: 0 },
+			
+			{ x: 148, y:  90, type: 1 },
+			{ x: 116, y:  90, type: 1 },
+			{ x:  96, y:  79, type: 1 },
+			{ x:  14, y:  63, type: 1 },
+			{ x:  14, y: 119, type: 1 },
+			{ x:  58, y: 119, type: 1 },
+			{ x: 116, y: 112, type: 1 },
+			{ x: 116, y: 112 + 11.5, type: 1 },
+			{ x: 116, y: 112 + 11.5 * 2, type: 1 },
+			{ x: 116, y: 112 + 11.5 * 3, type: 1 },
+			{ x: 116, y: 112 + 11.5 * 4, type: 1 },
+			{ x: 116, y: 112 + 11.5 * 5, type: 1 },
+			{ x:  58, y: 177, type: 1 },
+			{ x:  14, y: 177, type: 1 },
+
+			{ x:   5, y: 250 - 40, type: 0 },
+			{ x:  30, y: 250 - 20, type: 0 },
+			{ x: 110, y: 250 - 22, type: 0 },
+			{ x: 110, y: 250 - 54, type: 0 },
+			
+			{ x: 155, y: 250 - 50, type: 1 },
+			
+			{ x: 200, y: 250 - 45, type: 0 },
+			{ x: 215, y: 250 - 40, type: 0 },
+			{ x: 296, y: 250 - 17, type: 0 },
+			{ x: 330, y: 250 - 17, type: 0 },
+			{ x: 370, y: 250 - 20, type: 0 },
+		];
+
+	var first = true;
+	var ox = 0, oy = 0;
+	for (var seg = 0; seg < nsegments; seg++)
+	{
+		for (var h in holes)
+		{
+			var hole = holes[h];
+			var type = types[hole.type];
+		
+			if (type.always || first)
+				cnc.drill( { x: ox + hole.x, y: oy + hole.y, radius: type.r, depth: type.d, stepSizeZ: type.step } );
+		}
+		
+		ox += dim.x + spacing;				
+		first = false;
+	}
+	
+	cnc.setBody( { width: ox - spacing, height: dim.y, depth: 40, x: (ox - spacing) / 2, y: dim.y / 2 } );
+	cnc.done();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</pre>
