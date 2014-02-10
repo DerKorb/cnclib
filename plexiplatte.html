@@ -41,20 +41,32 @@
 <textarea class="buttons" style="display: none">
 </textarea>
 <script>
-	var cnc = new cnclib({ extendCorners: true, defaultSpeed: 500, dipSpeed: 200 });
-	var mill = 4;
+	var cnc = new cnclib({ extendCorners: false, defaultSpeed: 400, dipSpeed: 200 });
+	var mill = 2;
 
 	distance = 226/25;
 	feedSpeed = 200;
 	drillSpeed = 100;
 	
-	depth = 9;
+	depth = 4.2;
+	
 	
 	cnc.symmetric(function(x,y)
 	{
-		cnc.drill({radius: 8.5/2, x: x*425, y: y*45, depth: depth});
+		// Mounting
+		cnc.drill({radius: 4.6/2, x: x*75, y: y*31.55/2, depth: depth, nStepsZ: 4});
+		// Power Supply
+		cnc.drill({radius: 2.75/2, x: x*44.45/2+30, y: y*95.25/2+25, depth: depth, nStepsZ: 4});
+		// Beagle Bone
+		cnc.drill({radius: 2.75/2, x: x*(y==-1?41.91:48.39)/2-35, y: y*66.1/2+40, depth: depth, nStepsZ: 4});
+	});
+	cnc.symmetric(function(y)
+	{
+		cnc.drill({radius: 4.1/2, x: -90, y: y*47.2/2+30, depth: depth, nStepsZ: 4});
 	});
 
+	cnc.rect({width: 200, height: 120, x: -10, y: 30, outlineOnly: true, depth: depth, nStepsZ: 4});
+	
 	$(function() {cnc.done()});
 
 </script>

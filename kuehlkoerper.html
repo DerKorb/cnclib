@@ -45,8 +45,8 @@
 	var mill = 2;
 
 	var dim = { x: 400, y: 250 }; // width & height of segment
-	var nsegments = 3; // number of repeated segments
-	var spacing = 150; //mm spacing between segments
+	var nsegments = 2; // number of repeated segments
+	var spacing = 0; //mm spacing between segments
 	
 	var types = 
 		[
@@ -67,7 +67,7 @@
 			{ x: 330, y:  17, type: 0 },
 			{ x: 370, y:  20, type: 0 },
 			
-			{ x: 250, y:  75, type: 2 },
+//			{ x: 250, y:  75, type: 2 },
 
 			{ x: 231, y:  95, type: 0 },
 			{ x: 231, y: 155, type: 0 },
@@ -113,7 +113,7 @@
 			var type = types[hole.type];
 		
 			if (type.always || first)
-				cnc.drill( { x: ox + hole.x, y: oy + hole.y, radius: type.r, depth: type.d, stepSizeZ: type.step } );
+				cnc.drill( { x: ox + hole.x, y: dim.y - oy - hole.y, radius: type.r, depth: type.d, stepSizeZ: type.step } );
 		}
 		
 		ox += dim.x + spacing;				
