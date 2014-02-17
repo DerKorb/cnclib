@@ -40,14 +40,14 @@
 	var mill = 6;
 
 	distance = 226/25;
-	feedSpeed = 200;
+	feedSpeed = 500;
 	drillSpeed = 100;
 	
 	depth = 16;
 	segments = 3;
-	for (s=0; s<segments; s++)
+	for (s=1; s<segments; s++)
 	{
-		cnc.drill({radius: 11/2, x: s*400+100, y: 100, depth: 20});
+		//cnc.drill({radius: 11/2, x: s*400+250, y: 175, z: 0, depth: 25, stepFactor: 0.5});
 		cnc.customPart(function(lib)
 		{
 			for (y=-6.5; y<=6.5; y++)
