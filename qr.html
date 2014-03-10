@@ -1,0 +1,150 @@
+<div id="container"></div>
+<style>
+	body {
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+	}
+	
+	.buttons {
+		position: absolute;
+		top: 10px;
+		left: 10px;
+	}
+	
+	.buttons button {
+		border: 1px solid black;
+		background-color: darkgray;
+		color: white;
+		font-size: 16px;
+		padding: 4px;
+	}
+	
+	#time {
+		font-family: verdana;
+		font-size: 16px;
+		font-weight: bold;
+	}
+	#pathtime {
+		font-family: verdana;
+		font-size: 14px;
+		font-weight: bold;
+		color: #cccccc;
+	}
+</style>
+<script src="lib/jquery.js"></script>
+<script src="lib/socket.io.js"></script>
+<script src="lib/three.js"></script>
+<script src="lib/helvetiker_regular.typeface.js"></script>
+<script src="lib/orbit.js"></script>
+<script src="lib/cnclib.js"></script>
+<textarea class="buttons" style="display: none">
+</textarea>
+<script src="lib/qrcode.js"></script>
+<script>
+	var cnc = new cnclib({ extendCorners: false, defaultSpeed: 900, dipSpeed: 300, stepSizeZ: 0.7 });
+
+	var mill = 2.5;
+	var depth = 6;
+	var depthqr = 0.5;
+	
+	var width = 200;
+	var height = 200;
+	var border= 20;
+	
+	var qrcode	= new QRCode(-1, QRErrorCorrectLevel.H);
+	qrcode.addData("Pg9VjMC3xAoWnfD2aP6MUPyPBvaWE431mW");
+	qrcode.make();
+	
+	//umriss
+	cnc.rect({ width: width, height: height, x: width / 2, y: height / 2, inline: true, outlineOnly: true, depth: depth, extendCorners: false }, function (par)
+	{
+		var mc = qrcode.getModuleCount();
+		var tileW	= (width - border) / mc;
+		var tileH	= (height - border) / mc;
+				
+		for (var j = 0; j < mc; j++)
+		for (var i = 0; i < mc; i++)
+		{
+			if (!qrcode.isDark(i, j))
+				continue;
+			
+			var k = i + 1;
+			for (; k < mc; k++)
+			{
+				if (!qrcode.isDark(k, j))
+					break;
+			}
+			
+			var n = k - i;
+			
+			if (n != 1)
+				par.requires.push(cnc.rect({ width: tileW * n, height: tileH, x: par.x - (i + n / 2 - mc / 2) * tileW, y: par.y - (0.5 + j - mc / 2) * tileH, depth: depthqr, outlineOnly: false, nStepsZ: 1 }));
+			
+			i = k - 1;
+		}
+				
+		for (var j = 0; j < mc; j++)
+		for (var i = 0; i < mc; i++)
+		{
+			if (!qrcode.isDark(j, i))
+				continue;
+			
+			var k = i + 1;
+			for (; k < mc; k++)
+			{
+				if (!qrcode.isDark(j, k))
+					break;
+			}
+			
+			var n = k - i;
+			if (n != 1)
+				par.requires.push(cnc.rect({ width: tileW, height: tileH * n, x: par.x - (0.5 + j - mc / 2) * tileW, y: par.y - (i + n / 2 - mc / 2) * tileH, depth: depthqr, outlineOnly: false, nStepsZ: 1 }));
+			
+			i = k - 1;
+		}
+				
+		for (var j = 0; j < mc; j++)
+		for (var i = 0; i < mc; i++)
+		{
+			if (!qrcode.isDark(i, j))
+				continue;
+				
+			if (i < mc - 1 && qrcode.isDark(i + 1, j + 0))
+				continue;
+			
+			if (j < mc - 1 && qrcode.isDark(i + 0, j + 1))
+				continue;
+			
+			if (i > 1 && qrcode.isDark(i - 1, j + 0))
+				continue;
+			
+			if (j > 1 && qrcode.isDark(i + 0, j - 1))
+				continue;
+			
+			par.requires.push(cnc.rect({ width: tileW * n, height: tileH, x: par.x - (i + 0.5 - mc / 2) * tileW, y: par.y - (0.5 + j - mc / 2) * tileH, depth: depthqr, outlineOnly: false, nStepsZ: 1 }));
+		}
+	});
+	
+	$(function() {cnc.done(true)});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
