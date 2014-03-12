@@ -1,0 +1,58 @@
+<div id="container"></div>
+<style>
+	body {
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+	}
+	
+	.buttons {
+		position: absolute;
+		top: 10px;
+		left: 10px;
+	}
+	
+	.buttons button {
+		border: 1px solid black;
+		background-color: darkgray;
+		color: white;
+		font-size: 16px;
+		padding: 4px;
+	}
+	
+	#time {
+		font-family: verdana;
+		font-size: 16px;
+		font-weight: bold;
+	}
+	#pathtime {
+		font-family: verdana;
+		font-size: 14px;
+		font-weight: bold;
+		color: #cccccc;
+	}
+</style>
+<script src="lib/jquery.js"></script>
+<script src="lib/socket.io.js"></script>
+<script src="lib/three.js"></script>
+<script src="lib/helvetiker_regular.typeface.js"></script>
+<script src="lib/orbit.js"></script>
+<script src="lib/cnclib.js"></script>
+<textarea class="buttons" style="display: none">
+</textarea>
+<script>
+	var cnc = new cnclib({ extendCorners: true, defaultSpeed: 100, dipSpeed: 50 });
+	var mill = 8;
+
+	var width = 300, height = 300;
+	
+	var d = 10;
+	cnc.interpolate( [0, 100], d, function (p)
+	{
+		cnc.rect({ width: width - p, height: height, x: 0, y: 0, depth: d, z0: -p, nStepsZ: 1 });
+	}); 
+
+
+	cnc.done(false);
+
+</script>
