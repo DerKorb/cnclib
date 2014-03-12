@@ -41,18 +41,53 @@
 <textarea class="buttons" style="display: none">
 </textarea>
 <script>
-	var cnc = new cnclib({ extendCorners: true, defaultSpeed: 100, dipSpeed: 50 });
-	var mill = 8;
+	var cnc = new cnclib({ extendCorners: false, defaultSpeed: 600, dipSpeed: 100 });
+	var mill = 6;
 
-	var width = 300, height = 300;
+	var width = 90, height = 80;
 	
-	var d = 10;
-	cnc.interpolate( [0, 100], d, function (p)
+	var d = 1.264;
+	cnc.rect({ width: width, height: height, x: width / 2 + 5, y: height / 2 + 5, depth: 8.5, stepSizeZ: 1.5, clockwise: false });
+
+	cnc.interpolate( [d, 12.64], d, function (p)
 	{
-		cnc.rect({ width: width - p, height: height, x: 0, y: 0, depth: d, z0: -p, nStepsZ: 1 });
+		cnc.rect({ width: width - 2 * p, height: height - p, x: width / 2 + 5, y: height / 2 + 5 -p / 2, depth: d* 1.466772, z0: -8.5 - (p -d) * 1.466772, nStepsZ: 1, clockwise: false });
 	}); 
 
 
 	cnc.done(false);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </script>
