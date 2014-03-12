@@ -42,10 +42,10 @@
 </textarea>
 <script src="lib/qrcode.js"></script>
 <script>
-	var cnc = new cnclib({ extendCorners: false, defaultSpeed: 900, dipSpeed: 300, stepSizeZ: 0.7, nPathTrials: 100 });
+	var cnc = new cnclib({ extendCorners: false, defaultSpeed: 400, dipSpeed: 50, stepSizeZ: 1, nPathTrials: 1000, nPathIters: 100 });
 
 	var mill = 2.5;
-	var depth = 6;
+	var depth = 10.1;
 	var depthqr = 0.5;
 	
 	var qrcode	= new QRCode(-1, QRErrorCorrectLevel.H);
@@ -59,7 +59,7 @@
 	var border = 4 * mill;
 	
 	//umriss
-	cnc.rect({ width: width, height: height, x: width / 2, y: height / 2, inline: true, outlineOnly: true, depth: depth, extendCorners: false }, function (par)
+	cnc.rect({ width: width, height: height, x: width / 2, y: height / 2, inline: true, outlineOnly: true, depth: depthqr * 3, extendCorners: false }, function (par)
 	{
 		var tileW	= mill;
 		var tileH	= mill;
