@@ -42,14 +42,14 @@
 </textarea>
 <script src="lib/qrcode.js"></script>
 <script>
-	var cnc = new cnclib({ extendCorners: false, defaultSpeed: 400, dipSpeed: 50, stepSizeZ: 1, nPathTrials: 1000, nPathIters: 100 });
+	var cnc = new cnclib({ z_safe: 0.5, extendCorners: false, defaultSpeed: 70, dipSpeed: 15, stepSizeZ: 1, nPathTrials: 1000, nPathIters: 100 });
 
-	var mill = 2.5;
+	var mill = 1;
 	var depth = 10.1;
-	var depthqr = 0.5;
+	var depthqr = 0.4;
 	
 	var qrcode	= new QRCode(-1, QRErrorCorrectLevel.H);
-	qrcode.addData("Pg9VjMC3xAoWnfD2aP6MUPyPBvaWE431mW");
+	qrcode.addData("1P6ac3zjM8QYwWDUZFctLvpLLmGT5FenEK");
 	qrcode.make();
 
 	var mc = qrcode.getModuleCount();
@@ -58,9 +58,10 @@
 	var height = (mc + 4) * mill;
 	var border = 4 * mill;
 	
+	var par = { x: 0, y: 0, requires: [] };
 	//umriss
-	cnc.rect({ width: width, height: height, x: width / 2, y: height / 2, inline: true, outlineOnly: true, depth: depthqr * 3, extendCorners: false }, function (par)
-	{
+	//cnc.rect({ width: width, height: height, x: width / 2, y: height / 2, inline: true, outlineOnly: true, depth: depthqr * 3, extendCorners: false }, function (par)
+	//{
 		var tileW	= mill;
 		var tileH	= mill;
 		
@@ -137,7 +138,7 @@
 			
 			par.requires.push(cnc.drill({ x: par.x - (i + 0.5 - mc / 2) * tileW, y: par.y - (j + 0.5 - mc / 2) * tileH, depth: depthqr }));
 		}
-	});
+//	});
 	
 	$(function() {cnc.done(true)});
 

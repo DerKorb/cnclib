@@ -41,9 +41,9 @@
 <textarea class="buttons" style="display: none">
 </textarea>
 <script>
-	var cnc = new cnclib({ extendCorners: false, defaultSpeed: 600, dipSpeed: 100 });
+	var cnc = new cnclib({ extendCorners: false, defaultSpeed: 600, dipSpeed: 100, stepFactor: 0.75 / 2 });
 	var mill = 6;
-
+/*
 	var width = 90, height = 80;
 	
 	var d = 1.264;
@@ -53,7 +53,8 @@
 	{
 		cnc.rect({ width: width - 2 * p, height: height - p, x: width / 2 + 5, y: height / 2 + 5 -p / 2, depth: d* 1.466772, z0: -8.5 - (p -d) * 1.466772, nStepsZ: 1, clockwise: false });
 	}); 
-
+*/
+	cnc.test();
 
 	cnc.done(false);
 
