@@ -38,37 +38,53 @@
 <script>
 	var cnc = new cnclib({ extendCorners: true, dipSpeed: 50 , defaultSpeed: 300, maxVSpeed: 100});
 	var mill = 6;
-
 	distance = 226/25;
-	feedSpeed = 500;
+	var dipSpeed = 50;
+	feedSpeed = 300;
 	drillSpeed = 100;
 	
 	depth = 16;
-	segments = 3;
-	for (s=1; s<segments; s++)
+	segments = 1;
+	for (s=0; s<segments; s++)
 	{
 		//cnc.drill({radius: 11/2, x: s*400+250, y: 175, z: 0, depth: 25, stepFactor: 0.5});
 		cnc.customPart(function(lib)
 		{
+			lib.feed({z: 2});
+			lib.feed({x: s*400+139+mill/2, y: 125-6.5*distance-4.5, z: 1});
+			lib.feed({z: -6});
 			for (y=-6.5; y<=6.5; y++)
 			{
 				// goto start position:
-				lib.feed({x: s*400+139+mill/2, y: 125+y*distance, z: 1})
-				for (z=-3; z>=-18; z-=3)
-				{
-					// drill a bit:
-					lib.straightFeed({x: s*400+139+mill/2, y: 125+y*distance, z: z, speed: drillSpeed})
-					// mill 3mm
-					lib.straightFeed({x: s*400+139+122-mill/2, y: 125+y*distance, z: z, speed: feedSpeed})
-					z-=3;
-					// drill a bit:
-					lib.straightFeed({x: s*400+139+122-mill/2, y: 125+y*distance, z: z, speed: drillSpeed})
-					// mill 3mm
-					lib.straightFeed({x: s*400+139+mill/2, y: 125+y*distance, z: z, speed: feedSpeed})
-
-				}
-				lib.feed({z: 1});
+				lib.straightFeed({x: s*400+139+mill/2, 		y: 125+y*distance, speed: feedSpeed/6});
+				lib.straightFeed({x: s*400+139+122-mill/2, 	y: 125+y*distance, speed: feedSpeed});
+				y++;
+				lib.straightFeed({x: s*400+139+122-mill/2, 	y: 125+y*distance, speed: feedSpeed/6});
+				lib.straightFeed({x: s*400+139+mill/2, 		y: 125+y*distance, speed: feedSpeed});
 			}	
+			lib.feed({x: s*400+139+mill/2, y: 125+6.5*distance+4.5});
+			lib.feed({z: -12});
+			for (y=+6.5; y>=-6.5; y--)
+			{
+				// goto start position:
+				lib.straightFeed({x: s*400+139+mill/2, 		y: 125+y*distance, speed: feedSpeed/6});
+				lib.straightFeed({x: s*400+139+122-mill/2, 	y: 125+y*distance, speed: feedSpeed});
+				y--;
+				lib.straightFeed({x: s*400+139+122-mill/2, 	y: 125+y*distance, speed: feedSpeed/6});
+				lib.straightFeed({x: s*400+139+mill/2, 		y: 125+y*distance, speed: feedSpeed});
+			}	
+			lib.feed({x: s*400+139+mill/2, y: 125-6.5*distance-4.5});
+			lib.feed({z: -18});
+			for (y=-6.5; y<=6.5; y++)
+			{
+				// goto start position:
+				lib.straightFeed({x: s*400+139+mill/2, 		y: 125+y*distance, speed: feedSpeed/6});
+				lib.straightFeed({x: s*400+139+122-mill/2, 	y: 125+y*distance, speed: feedSpeed});
+				y++;
+				lib.straightFeed({x: s*400+139+122-mill/2, 	y: 125+y*distance, speed: feedSpeed/6});
+				lib.straightFeed({x: s*400+139+mill/2, 		y: 125+y*distance, speed: feedSpeed});
+			}	
+			lib.feed({z: 2});
 		});
 	}
 	$(function() {

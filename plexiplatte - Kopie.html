@@ -42,9 +42,9 @@
 </textarea>
 <script>
 	var cnc = new cnclib({ extendCorners: false, defaultSpeed: 400, dipSpeed: 200 });
-	var mill = 8;
+	var mill = 6;
+	cnc.rect({width: 120, height: 60, depth: 3, x: 60, y:30, nStepsZ: 1, stepSize: 3});
 
-	cnc.drill({radius: 11.9/2, x: 0, y: 0, depth: 10, nStepsZ: 10});
 	
 	$(function() {cnc.done()});
 
